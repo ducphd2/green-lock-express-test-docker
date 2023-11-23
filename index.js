@@ -43,13 +43,11 @@ process.on('uncaughtException', (error) => {
   console.error('Unhandled error', error);
 });
 
-if (require.main === module) {
-  const port = 3000;
-  require('http')
-    .createServer(app)
-    .listen(port, function () {
-      console.info('Listening for HTTP on 👉', this.address());
-    });
-}
+const port = 3000;
+require('http')
+  .createServer(app)
+  .listen(port, function () {
+    console.info('Listening for HTTP on 👉', this.address());
+  });
 
 module.exports = app;
