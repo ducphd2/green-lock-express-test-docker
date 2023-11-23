@@ -1,0 +1,4 @@
+{
+  "defaults": { "subscriberEmail": "ducphd2@gmail.com" },
+  "sites": [{ "subject": "ducph.me", "altnames": ["ducph.me"] }]
+}
