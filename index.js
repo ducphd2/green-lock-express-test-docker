@@ -1,17 +1,14 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
 
 const app = express();
-const port = 3000;
 
 app.set('view engine', 'ejs');
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.json(), express.urlencoded({ extended: false }));
 
-// Connect to MongoDB
 mongoose
-  .connect('mongodb://mongodb:27017/docker-node-mongo')
+  .connect('mongodb://mongodb:27017/test')
   .then(() => console.log('MongoDB Connected'))
   .catch((err) => console.log(err));
 
@@ -36,5 +33,23 @@ app.post('/item/add', (req, res) => {
     })
     .catch((err) => console.log(err));
 });
+
+app.use((error, req, res, next) => {
+  console.error('Request error', error);
+  res.status(500).json({ message: 'internal error' });
+});
+
+process.on('uncaughtException', (error) => {
+  console.error('Unhandled error', error);
+});
+
+if (require.main === module) {
+  const port = 3000;
+  require('http')
+    .createServer(app)
+    .listen(port, function () {
+      console.info('Listening for HTTP on 👉', this.address());
+    });
+}
 
 module.exports = app;

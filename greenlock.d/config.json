@@ -1,4 +1,39 @@
 {
-  "defaults": { "subscriberEmail": "ducphd2@gmail.com" },
-  "sites": [{ "subject": "ducph.me", "altnames": ["ducph.me"] }]
+  "defaults": {
+    "subscriberEmail": "ducphd2@gmail.com",
+    "store": {
+      "module": "greenlock-store-fs"
+    },
+    "challenges": {
+      "http-01": {
+        "module": "acme-http-01-standalone"
+      }
+    },
+    "renewOffset": "-45d",
+    "renewStagger": "3d",
+    "accountKeyType": "EC-P256",
+    "serverKeyType": "RSA-2048"
+  },
+  "sites": [
+    {
+      "subject": "ducph.me",
+      "altnames": ["ducph.me"],
+      "renewAt": 1
+    },
+    {
+      "subject": "ducph.click",
+      "altnames": ["ducph.click"],
+      "renewAt": 1
+    },
+    {
+      "subject": "ducph.info",
+      "altnames": ["ducph.info"],
+      "renewAt": 1
+    },
+    {
+      "subject": "mihealthcare.click",
+      "altnames": ["mihealthcare.click"],
+      "renewAt": 1
+    }
+  ]
 }
